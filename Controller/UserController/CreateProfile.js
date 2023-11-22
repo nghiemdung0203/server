@@ -31,7 +31,7 @@ module.exports.CreateProfile = (req, res) => {
           },
           process.env.TOKEN_SECRET, // Use your own secret key
           {
-            expiresIn: "1h", // Set the expiration time for the token
+            expiresIn: "24h", // Set the expiration time for the token
           }
         );
 
