@@ -6,5 +6,5 @@ const router = require('express').Router();
 
 router.post('/CreateTable', CreateTable);
 router.put('/UpdateTable', UpdateTable);
-router.post('/GetTables', GetTables)
+router.get('/GetTables', GetTables)
 module.exports = router
