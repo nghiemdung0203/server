@@ -8,7 +8,7 @@ const router = require('express').Router();
 
 router.post('/CreateRestaurant',AuthenManager ,CreateRestaurant);
 router.delete('/DeleteRestaurant',AuthenManager ,DeleteRestaurant);
-router.post('/getRestaurantsForManager',AuthenManager ,getRestaurant);
+router.get('/getRestaurantsForManager',AuthenManager ,getRestaurant);
 router.put('/UpdateRestaurant',AuthenManager ,UpdateRestaurant)
 
 

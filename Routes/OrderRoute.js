@@ -13,5 +13,5 @@ router.put('/AddFoodAndDrinkToOrder',AuthenForCustomer, AddFoodAndDrinkToOrder)
 router.delete('/DeleteOrderItems', DeleteOrderItems);
 router.delete('/DeleteOrder', DeleteOrders);
 router.post('/GetOrder', GetOrder);
-router.post('/GetSpecificOrder', GetSpecificOrder)
+router.get('/GetSpecificOrder', GetSpecificOrder)
 module.exports = router

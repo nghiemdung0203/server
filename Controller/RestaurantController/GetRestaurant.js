@@ -1,7 +1,7 @@
 const pool = require("../../database");
 
 module.exports.getRestaurant = (req, res) => {
-  const { profileID } = req.body;
+  const profileID = req.query.profileID;
 
   pool.query('Select * from profile where ID = ?', [profileID], (error, profileResult) => {
     if (error) {

@@ -10,9 +10,9 @@ const AuthenManager = (req, res, next) => {
     try {
         token = token.replace("Bearer ", "")
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
-
+        console.log(decoded)
         // Check if the role is "manager"
-        if (decoded && decoded.role === "Manager") {
+        if (decoded && decoded.Role === 'Manager') {
             req.user = decoded;
             return next();
         } else {

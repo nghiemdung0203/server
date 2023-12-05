@@ -2,7 +2,7 @@ const pool = require('../../database');
 const jwt = require('jsonwebtoken');
 
 module.exports.GetSpecificProfile = (req, res) => {
-    const { profileID } = req.body;
+    const profileID = req.query.profileID;
 
     pool.query(
         'Select * from profile where ID = ?',
