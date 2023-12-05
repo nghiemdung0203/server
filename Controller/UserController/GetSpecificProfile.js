@@ -12,6 +12,8 @@ module.exports.GetSpecificProfile = (req, res) => {
                 return res.status(500).send(error);
             } else {
                 const {UserID, Role} = result[0];
+                console.log(`User ${UserID}`)
+                console.log(`Role ${Role}`)
                 const token = jwt.sign(
                     {
                         UserID,
