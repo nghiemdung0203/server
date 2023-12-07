@@ -1,7 +1,7 @@
 const pool = require('../../database');
 
 module.exports.GetOrder = (req, res) => {
-    const { profileID } = req.body;
+    const profileID = req.query.profileID;
     pool.query(
         'Select * from orders where Customer_id = ?',[profileID],
         (error, result) => {

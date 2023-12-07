@@ -12,6 +12,6 @@ router.post('/CreateOrder',AuthenForCustomer ,CreateOrder);
 router.put('/AddFoodAndDrinkToOrder',AuthenForCustomer, AddFoodAndDrinkToOrder)
 router.delete('/DeleteOrderItems', DeleteOrderItems);
 router.delete('/DeleteOrder', DeleteOrders);
-router.post('/GetOrder', GetOrder);
+router.get('/GetOrder', GetOrder);
 router.get('/GetSpecificOrder', GetSpecificOrder)
 module.exports = router
