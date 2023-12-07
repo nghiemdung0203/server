@@ -6,13 +6,13 @@ var jwt = require("jsonwebtoken");
 
 module.exports.SignUp = async (req, res) => {
   
-  const { email, uid, token } = req.body;
+  const { email, uid, token, PhoneNumber } = req.body;
   // Create a user in the Users table
 
 
   pool.query(
     "INSERT INTO users (email, PhoneNumber, uid, token) VALUES (?, ?, ?, ?)",
-    [email, encryptedPassword, name, avatar, PhoneNumber, uid, token],
+    [email, PhoneNumber, uid, token],
     (error, resultsInsert) => {
       if (error) {
         return res.status(400).send(error);
