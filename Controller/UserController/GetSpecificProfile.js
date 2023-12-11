@@ -5,7 +5,7 @@ module.exports.GetSpecificProfile = (req, res) => {
   const profileID = req.query.profileID;
 
   pool.query(
-    "Select * from profile where UserID = ?",
+    "Select * from profile where ID = ?",
     [profileID],
     (error, result) => {
       if (error) {
