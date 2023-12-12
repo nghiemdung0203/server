@@ -5,14 +5,15 @@ module.exports.CreateProfile = (req, res) => {
   const { UserID, Role, restaurantID, isWorking } = req.body;
 
   function generateRandomString() {
-    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let result = '';
-  
+    const characters =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "";
+
     for (let i = 0; i < 8; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       result += characters.charAt(randomIndex);
     }
-  
+
     return result;
   }
   const randomString = generateRandomString();
@@ -21,24 +22,29 @@ module.exports.CreateProfile = (req, res) => {
     return res
       .status(500)
       .json({ error: "Staff role requires more information" });
-  } else if (Role === "Customer" && restaurantID || Role === 'Customer' && isWorking) {
+  } else if (
+    (Role === "Customer" && restaurantID) ||
+    (Role === "Customer" && isWorking)
+  ) {
     return res
       .status(500)
-      .json({ error: "Customer role doesn't need restaurantID and working status" });
+      .json({
+        error: "Customer role doesn't need restaurantID and working status",
+      });
   }
 
-  if (Role === 'Customer') {
+  if (Role === "Customer") {
     randomString = null;
     pool.query(
-      "INSERT INTO profile (UserID, Role, CodeName) VALUES (?, ?, ?)",
-      [UserID, Role, randomString],
+      "INSERT INTO profile (UserID, Role, restaurantID, isWorking, CodeName) VALUES (?, ?, ?, ?,?)",
+      [UserID, Role, null, null, randomString],
       (error, result) => {
         if (error) {
           return res.status(400).send(error);
           // Handle the error
         } else {
           const profileID = result.insertId;
-  
+
           // Create a token
           const token = jwt.sign(
             {
@@ -51,7 +57,7 @@ module.exports.CreateProfile = (req, res) => {
               expiresIn: "24h", // Set the expiration time for the token
             }
           );
-  
+
           pool.query(
             "SELECT * FROM profile WHERE ID = ?",
             [result.insertId],
@@ -74,7 +80,7 @@ module.exports.CreateProfile = (req, res) => {
           // Handle the error
         } else {
           const profileID = result.insertId;
-  
+
           // Create a token
           const token = jwt.sign(
             {
@@ -87,7 +93,7 @@ module.exports.CreateProfile = (req, res) => {
               expiresIn: "24h", // Set the expiration time for the token
             }
           );
-  
+
           pool.query(
             "SELECT * FROM profile WHERE ID = ?",
             [result.insertId],
@@ -101,5 +107,4 @@ module.exports.CreateProfile = (req, res) => {
       }
     );
   }
-  
 };
