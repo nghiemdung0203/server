@@ -18,21 +18,6 @@ module.exports.CreateProfile = (req, res) => {
   }
   const randomString = generateRandomString();
 
-  if (Role !== "Customer" && !restaurantID && !isWorking) {
-    return res
-      .status(500)
-      .json({ error: "Staff role requires more information" });
-  } else if (
-    (Role === "Customer" && restaurantID) ||
-    (Role === "Customer" && isWorking)
-  ) {
-    return res
-      .status(500)
-      .json({
-        error: "Customer role doesn't need restaurantID and working status",
-      });
-  }
-
   if (Role === "Customer") {
     randomString = null;
     pool.query(
