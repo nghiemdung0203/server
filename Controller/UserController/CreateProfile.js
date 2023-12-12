@@ -30,8 +30,8 @@ module.exports.CreateProfile = (req, res) => {
   if (Role === 'Customer') {
     randomString = null;
     pool.query(
-      "INSERT INTO profile (UserID, Role, restaurantID, isWorking, CodeName) VALUES (?, ?, ?, ?, ?)",
-      [UserID, Role, restaurantID, isWorking, randomString],
+      "INSERT INTO profile (UserID, Role, CodeName) VALUES (?, ?, ?)",
+      [UserID, Role, randomString],
       (error, result) => {
         if (error) {
           return res.status(400).send(error);
