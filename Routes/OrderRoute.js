@@ -17,6 +17,7 @@ const {
   GetSpecificOrder,
 } = require("../Controller/OrderController.js/GetSpecificOrder");
 const AuthenForCashier = require("../Middleware/AuthenForCashier");
+const AuthenForChef = require("../Middleware/AuthenForChef");
 const AuthenForCustomer = require("../Middleware/AuthenForCustomer");
 
 const router = require("express").Router();
@@ -32,5 +33,5 @@ router.delete("/DeleteOrder", DeleteOrders);
 router.get("/GetOrder", GetOrder);
 router.get("/GetSpecificOrder", GetSpecificOrder);
 router.put("/CompletePayment", AuthenForCashier, CompletePayment);
-router.put("/CompoleteOrder",AuthenForChef ,CompleteOrder)
+router.put("/CompoleteOrder",AuthenForChef, CompleteOrder)
 module.exports = router;
