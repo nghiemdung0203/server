@@ -26,7 +26,7 @@ module.exports.CreateRestaurant = async (req, res) => {
               "INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (?, ?)",
               [0, result.insertId]
             );
-            res.status(200).send("Create restaurant successfully");
+            res.status(200).send(`Create restaurant successfully ${i}`);
           } catch (error) {
             return res.status(500).send(err);
           }
