@@ -10,6 +10,6 @@ const router = require('express').Router();
 router.post('/AddFood',upload.single('AvatarPicture') ,AddFood);
 router.delete('/DeleteFood', DeleteFood);
 router.get('/GetFood', GetFood)
-router.put('/UpdateFood', UpdateFood)
+router.patch('/UpdateFood', UpdateFood)
 
 module.exports = router

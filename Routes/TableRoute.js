@@ -5,6 +5,6 @@ const { UpdateTable } = require('../Controller/TableController/UpdateTable');
 const router = require('express').Router();
 
 router.post('/CreateTable', CreateTable);
-router.put('/UpdateTable', UpdateTable);
+router.patch('/UpdateTable', UpdateTable);
 router.get('/GetTables', GetTables)
 module.exports = router

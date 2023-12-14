@@ -23,7 +23,7 @@ const AuthenForCustomer = require("../Middleware/AuthenForCustomer");
 const router = require("express").Router();
 
 router.post("/CreateOrder", AuthenForCustomer, CreateOrder);
-router.put(
+router.patch(
   "/AddFoodAndDrinkToOrder",
   AuthenForCustomer,
   AddFoodAndDrinkToOrder
@@ -32,6 +32,6 @@ router.delete("/DeleteOrderItems", DeleteOrderItems);
 router.delete("/DeleteOrder", DeleteOrders);
 router.get("/GetOrder", GetOrder);
 router.get("/GetSpecificOrder", GetSpecificOrder);
-router.put("/CompletePayment", AuthenForCashier, CompletePayment);
-router.put("/CompoleteOrder",AuthenForChef, CompleteOrder)
+router.patch("/CompletePayment", AuthenForCashier, CompletePayment);
+router.patch("/CompoleteOrder",AuthenForChef, CompleteOrder)
 module.exports = router;
