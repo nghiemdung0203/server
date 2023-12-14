@@ -16,13 +16,14 @@ module.exports.CreateRestaurant = async(req, res) => {
         if (error) {
             res.status(500).send(error)
         } else {
-            pool.query('INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (?, ?)', [0, result.insertId], (err, ress) => {
-              if (err) {
-                return res.status(500).send(err);
-              } else {
-                res.status(200).send("Create restaurant successfully");
-              }
-            })
+            for (let i = 0; i < Number_of_table; i++) {
+              pool.query('INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (?, ?)', [0, result.insertId], (err, ress) => {
+                if (err) {
+                  return res.status(500).send(err);
+                }
+              })
+            }
+            return res.status(200).send("Create restaurant successfully")
         }
     }
   );
