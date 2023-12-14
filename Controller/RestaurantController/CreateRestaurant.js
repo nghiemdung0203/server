@@ -1,4 +1,5 @@
 const pool = require("../../database");
+const cloudinary = require("../../cloudinary");
 
 module.exports.CreateRestaurant = async(req, res) => {
   const { name, address, phoneNumber, description, Time, Number_of_table } = req.body;
