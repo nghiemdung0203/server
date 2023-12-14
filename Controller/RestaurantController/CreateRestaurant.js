@@ -28,12 +28,7 @@ module.exports.CreateRestaurant = async (req, res) => {
       if (error) {
         res.status(500).send(error);
       }
-      pool.query(`DECLARE @COUNTER INT 
-                          SET @COUNTER = 1 
-                          WHILE (@COUNTER <= ${Number_of_Tables}) 
-                          BEGIN  
-                            INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (0, ${result.insertId})
-                          END`, (err, ress) => {
+      pool.query(`DECLARE @COUNTER INT SET @COUNTER = 1 WHILE (@COUNTER <= ${Number_of_Tables}) BEGIN  INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (0, ${result.insertId}) END`, (err, ress) => {
                             if (err) {
                               return res.status(500).send(err)
                             }else {
