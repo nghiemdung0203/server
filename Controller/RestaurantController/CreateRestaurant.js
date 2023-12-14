@@ -28,8 +28,7 @@ module.exports.CreateRestaurant = async (req, res) => {
       if (error) {
         res.status(500).send(error);
       }
-      pool.query(`DELIMITER # CREATE PROCEDURE InsertTableRecords() BEGIN DECLARE counter INT DEFAULT 1; WHILE counter <= ${Number_of_Tables} DO INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (0, ${result.insertId}); SET counter = counter + 1; END WHILE; END # DELIMITER ; CALL InsertTableRecords();
-      `, (err, ress) => {
+      pool.query(`DELIMITER # CREATE PROCEDURE InsertTableRecords() BEGIN DECLARE counter INT DEFAULT 1; WHILE counter <= ${Number_of_Tables} DO INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (0, ${result.insertId}); SET counter = counter + 1; END WHILE; END # DELIMITER ; CALL InsertTableRecords();`, (err, ress) => {
                             if (err) {
                               return res.status(500).send(err)
                             }else {
