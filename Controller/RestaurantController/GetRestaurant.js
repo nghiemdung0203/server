@@ -7,7 +7,6 @@ module.exports.getRestaurant = (req, res) => {
     if (error) {
       return res.status(500).send(error);
     } else {
-      if (profileResult[0].Role === 'Manager') {
         pool.query(
           "Select profile.Role, restaurant.Name, restaurant.Address, restaurant.PhoneNumber, restaurant.Avatar from profile INNER JOIN manager ON profile.ID = manager.Profile_id INNER JOIN restaurant ON manager.Restaurant_id = restaurant.ID WHERE profile.ID = ?",
           [profileID],
@@ -19,9 +18,6 @@ module.exports.getRestaurant = (req, res) => {
             }
           }
         );
-      } else {
-        return res.status(400).send("You're not authorized to access this")
-      } 
     }
   })
 
