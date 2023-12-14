@@ -5,7 +5,7 @@ module.exports.GetProfiles = (req, res) => {
     console.log(UserID);
 
     pool.query(
-        'SELECT * FROM profile ' +
+        'SELECT profile.ID, profile.UserID, profile.Role FROM profile ' +
         'LEFT JOIN restaurant ON profile.RestaurantID = restaurant.ID ' +
         'INNER JOIN users ON users.uid = profile.UserID ' +
         'WHERE users.uid = ?',
