@@ -14,7 +14,7 @@ module.exports.CreateRestaurant = async(req, res) => {
 
   pool.query(
     "INSERT INTO restaurant (Name, Address, PhoneNumber, Avatar, Number_of_tables, Time, Description) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [name, address, phoneNumber, Avatar.secure_url, description, Time, Number_of_Tables],
+    [name, address, phoneNumber, Avatar.secure_url, Number_of_Tables, Time, description],
     (error, result) => {
         if (error) {
             res.status(500).send(error)
