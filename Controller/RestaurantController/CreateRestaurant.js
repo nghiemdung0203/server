@@ -18,7 +18,7 @@ module.exports.CreateRestaurant = async(req, res) => {
     (error, result) => {
         if (error) {
             res.status(500).send(error)
-        } else {
+        }
             for (let i = 0; i < Number_of_Tables; i++) {
               pool.query('INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID) VALUES (?, ?)', [0, result.insertId], (err, ress) => {
                 if (err) {
@@ -28,6 +28,5 @@ module.exports.CreateRestaurant = async(req, res) => {
             }
             return res.status(200).send("Create restaurant successfully")
         }
-    }
   );
 };
