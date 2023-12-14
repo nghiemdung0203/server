@@ -9,7 +9,7 @@ module.exports.getRestaurant = (req, res) => {
       return res.status(500).send(error);
     } else {
         pool.query(
-          "Select profile.Role, restaurant.Name, restaurant.Address, restaurant.PhoneNumber, restaurant.Avatar from profile INNER JOIN manager ON profile.ID = manager.Profile_id INNER JOIN restaurant ON manager.Restaurant_id = restaurant.ID WHERE profile.ID = ?",
+          "Select profile.Role, restaurant.Name, restaurant.Address, restaurant.PhoneNumber, restaurant.Avatar from profile INNER JOIN restaurant ON profile.RestaurantID = restaurant.ID WHERE profile.ID = ?",
           [profileID],
           (error, result) => {
             if (error) {
