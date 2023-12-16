@@ -2,6 +2,7 @@ const pool = require("../../database");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 var jwt = require("jsonwebtoken");
+const cloudinary = require("../../cloudinary");
 
 
 module.exports.SignUp = async (req, res) => {
