@@ -17,7 +17,7 @@ module.exports.SignUp = async (req, res) => {
 
   pool.query(
     "INSERT INTO users (email, Avatar, PhoneNumber, uid, token) VALUES (?, ?, ?, ?, ?)",
-    [email, Avatar,PhoneNumber, uid, token],
+    [email, Avatar, PhoneNumber, uid, token],
     (error, resultsInsert) => {
       if (error) {
         return res.status(400).send(error);
