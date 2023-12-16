@@ -13,12 +13,12 @@ module.exports.SignUp = async (req, res) => {
   const AvatarPath = req.file.path
   const Avatar = await cloudinary.uploader.upload(AvatarPath, {
     resource_type: "image",
-    folder: 'Drink'
+    folder: 'User'
   });
 
   pool.query(
     "INSERT INTO users (email, Avatar, PhoneNumber, uid, token) VALUES (?, ?, ?, ?, ?)",
-    [email, Avatar.secure_url, PhoneNumber, uid, token],
+    [email, Avatar.url, PhoneNumber, uid, token],
     (error, resultsInsert) => {
       if (error) {
         return res.status(400).send(error);
