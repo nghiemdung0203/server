@@ -10,6 +10,7 @@ const FoodRoutes = require('./Routes/FoodRoute')
 const DrinkRoutes = require('./Routes/DrinkRoute')
 const OrderRoutes = require('./Routes/OrderRoute')
 const TableRotues = require('./Routes/TableRoute')
+const MenuRoutes = require('./Routes/MenuRoute')
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use('/Food', FoodRoutes)
 app.use('/Drinks', DrinkRoutes)
 app.use('/Orders', OrderRoutes)
 app.use('/Tables', TableRotues)
+app.use('/Menu', MenuRoutes)
 
 const server = http.createServer(app);
 
