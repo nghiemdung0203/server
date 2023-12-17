@@ -24,6 +24,11 @@ router.post(
 );
 router.delete("/DeleteRestaurant", AuthenManager, DeleteRestaurant);
 router.get("/getRestaurantsForManager", getRestaurant);
-router.patch("/UpdateRestaurant", AuthenManager, UpdateRestaurant);
+router.patch(
+  "/UpdateRestaurant",
+  AuthenManager,
+  upload.single("AvatarPicture"),
+  UpdateRestaurant
+);
 
 module.exports = router;
