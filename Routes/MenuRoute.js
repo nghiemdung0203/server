@@ -8,6 +8,6 @@ const router = require("express").Router();
 router.post("/CreateMenu", CreateMenu);
 router.post('/AddFoodAndDrinkToMenu', AddFoodAndDrinkToMenu)
 router.get('/GetMenu', GetMenu)
-router.delete('DeleteFoodAndDrinkFromMenu', DeleteFoodAndDrinkFromMenu)
+router.delete('/DeleteFoodAndDrinkFromMenu', DeleteFoodAndDrinkFromMenu)
 
 module.exports = router;
