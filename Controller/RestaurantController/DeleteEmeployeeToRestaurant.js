@@ -3,16 +3,16 @@ const pool = require("../../database");
 module.exports.DeleteEmeployeeToRestaurant = (req, res) => {
   const { profileID, Restaurant_id } = req.body;
   pool.query(
-    "Select RestaurantID from profile where ID = ?",
+    "Select * from profile where ID = ?",
     [profileID],
     (error, result) => {
       if (error) {
         res.status(500).send(error);
       } else {
-        console.log(result)
-        console.log(typeof(result))
+        console.log(result[0].RestaurantID)
+        console.log(typeof(result[0].RestaurantID.toString()))
         console.log(typeof(Restaurant_id))
-        if (result !== Restaurant_id) {
+        if (result[0].RestaurantID.toString() !== Restaurant_id) {
           return res.status(400).send("Profile not found");
         } else {
           pool.query(
