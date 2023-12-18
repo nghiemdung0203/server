@@ -30,7 +30,20 @@ module.exports.CreateRestaurant = async (req, res) => {
             return res.status(500).send(err);
           }
         }
-        res.status(200).send(`Create restaurant successfully`);
+
+        pool.query(
+          "INSERT INTO Menu (Restaurant_id) VALUES (?)",
+          [result.insertId],
+          (error, result) => {
+            if (error) {
+              return res.status(500).send(error);
+            } else {
+              res.status(200).send(`Create restaurant successfully`);
+            }
+          }
+        );
+
+        
       }
     }
   );
