@@ -37,5 +37,5 @@ router.patch(
   UpdateRestaurant
 );
 router.put("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
-router.get("/GetEmplyee", AuthenManager, GetEmployee);
+router.get("/GetEmployee", AuthenManager, GetEmployee);
 module.exports = router;
