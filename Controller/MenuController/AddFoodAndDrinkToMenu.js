@@ -13,7 +13,7 @@ module.exports.AddFoodAndDrinkToMenu = (req, res) => {
     ? FoodItems.map((item) => {
         const { food_id } = item;
         return executeQuery(
-          "INSERT INTO orderitems (Menu_id, FoodID) VALUES (?, ?)",
+          "INSERT INTO MenuItems (Menu_id, FoodID) VALUES (?, ?)",
           [MenuID, food_id]
         );
       })
@@ -23,7 +23,7 @@ module.exports.AddFoodAndDrinkToMenu = (req, res) => {
     ? DrinkItems.map((item) => {
         const { drink_id } = item;
         return executeQuery(
-          "INSERT INTO orderitems (Menu_id, DrinkID) VALUES (?, ?)",
+          "INSERT INTO MenuItems (Menu_id, DrinkID) VALUES (?, ?)",
           [MenuID, drink_id]
         );
       })
