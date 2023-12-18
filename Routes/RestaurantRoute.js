@@ -13,7 +13,12 @@ const {
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const AuthenManager = require("../Middleware/AuthenForManager");
-const { DeleteEmeployeeToRestaurant } = require("../Controller/RestaurantController/DeleteEmeployeeToRestaurant");
+const {
+  DeleteEmeployeeToRestaurant,
+} = require("../Controller/RestaurantController/DeleteEmeployeeToRestaurant");
+const {
+  GetEmployee,
+} = require("../Controller/RestaurantController/GetEmployee");
 
 const router = require("express").Router();
 
@@ -31,6 +36,6 @@ router.patch(
   upload.single("AvatarPicture"),
   UpdateRestaurant
 );
-router.put('/DeleteEmeployeeToRestaurant', DeleteEmeployeeToRestaurant)
-
+router.put("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
+router.get("/GetEmplyee", AuthenManager, GetEmployee);
 module.exports = router;
