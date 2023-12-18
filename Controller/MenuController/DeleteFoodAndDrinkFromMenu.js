@@ -5,7 +5,7 @@ module.exports.DeleteFoodAndDrinkFromMenu = (req, res) => {
   const Drink_id = req.query.Drink_id;
   const Menu_id = req.query.Menu_id;
   pool.query(
-    "Delete from MenuItems where Menu_id = ? && Food_id = ? || Drink_id = ?",
+    "DELETE FROM MenuItems WHERE Menu_id = ? AND (Food_id = ? OR Drink_id = ?)",
     [Menu_id, Food_id, Drink_id],
     (error, result) => {
       if (error) {
