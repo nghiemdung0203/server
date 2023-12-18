@@ -31,6 +31,6 @@ router.patch(
   upload.single("AvatarPicture"),
   UpdateRestaurant
 );
-router.patch('/DeleteEmeployeeToRestaurant', DeleteEmeployeeToRestaurant)
+router.put('/DeleteEmeployeeToRestaurant', DeleteEmeployeeToRestaurant)
 
 module.exports = router;
