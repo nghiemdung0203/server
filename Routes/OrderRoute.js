@@ -13,6 +13,7 @@ const {
   DeleteOrders,
 } = require("../Controller/OrderController.js/DeleteOrders");
 const { GetOrder } = require("../Controller/OrderController.js/GetOrder");
+const { GetOrderByRestaurant } = require("../Controller/OrderController.js/GetOrderByRestaurant");
 const {
   GetSpecificOrder,
 } = require("../Controller/OrderController.js/GetSpecificOrder");
@@ -34,4 +35,5 @@ router.get("/GetOrder", GetOrder);
 router.get("/GetSpecificOrder", GetSpecificOrder);
 router.patch("/CompletePayment", AuthenForCashier, CompletePayment);
 router.patch("/CompoleteOrder",AuthenForChef, CompleteOrder)
+router.get('/GetOrderByRestaurant', GetOrderByRestaurant)
 module.exports = router;
