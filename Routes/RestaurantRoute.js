@@ -13,6 +13,7 @@ const {
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const AuthenManager = require("../Middleware/AuthenForManager");
+const { DeleteEmeployeeToRestaurant } = require("../Controller/RestaurantController/DeleteEmeployeeToRestaurant");
 
 const router = require("express").Router();
 
@@ -30,5 +31,6 @@ router.patch(
   upload.single("AvatarPicture"),
   UpdateRestaurant
 );
+router.patch('/DeleteEmeployeeToRestaurant', DeleteEmeployeeToRestaurant)
 
 module.exports = router;
