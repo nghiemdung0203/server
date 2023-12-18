@@ -10,7 +10,7 @@ module.exports.DeleteEmeployeeToRestaurant = (req, res) => {
             res.status(400).send('Profile not found')
         } 
         pool.query(
-            "Update profile Set RestaurantID = NULL, isWorking = 0, CodeName = NULL, Time = 0 WHERE ID = ?",
+            "Update profile Set RestaurantID = NULL, isWorking = 0, CodeName = NULL, Time = NULL WHERE ID = ?",
             [profileID],
             (error, result) => {
               if (error) {
