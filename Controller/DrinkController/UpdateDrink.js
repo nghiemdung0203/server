@@ -1,8 +1,12 @@
 const pool = require("../../database");
-
-module.exports.UpdateDrink = (req, res) => {
+const cloudinary = require("../../cloudinary");
+module.exports.UpdateDrink = async(req, res) => {
     const { DrinkID, DrinkName, DrinkSize, DrinkCategory, DrinksPrice } = req.body;
-
+    const AvatarPath = req.file.path
+    const Avatar = await cloudinary.uploader.upload(AvatarPath, {
+      resource_type: "image",
+      folder: 'Drink'
+    });
     // Check if at least one property is provided for update
     if (!DrinkName && !DrinkSize && !DrinkCategory && !DrinksPrice) {
         return res.status(400).json({ error: "At least one property is required for update." });

@@ -12,6 +12,10 @@ module.exports.AddFood = async (req, res) => {
     if (error) {
       return res.status(400).send({error});
     } else {
+
+      // Add món này vào menu luôn
+
+      
       return res.status(200).send("Add food successfully");
     }
   })
