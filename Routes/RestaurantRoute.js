@@ -19,6 +19,7 @@ const {
 const {
   GetEmployee,
 } = require("../Controller/RestaurantController/GetEmployee");
+const { AddEmployee } = require("../Controller/RestaurantController/AddEmployee");
 
 const router = require("express").Router();
 
@@ -38,4 +39,5 @@ router.patch(
 );
 router.put("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
 router.get("/GetEmployee", AuthenManager, GetEmployee);
+router.put("/AddEmployee", AddEmployee);
 module.exports = router;
