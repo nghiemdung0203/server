@@ -2,7 +2,6 @@ const pool = require('../../database');
 
 module.exports.GetOrderByRestaurant = (req, res) => {
     const Restaurant_id = req.query.Restaurant_id;
-    console.log(Restaurant_id)
     pool.query(
         'Select * from orders where Restaurant_id = ?',[Restaurant_id],
         (error, result) => {
