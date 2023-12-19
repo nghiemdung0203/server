@@ -24,7 +24,7 @@ module.exports.UpdateFood = async (req, res) => {
   const setClause = [];
   if (Name) setClause.push(`Name = '${Name}'`);
   if (DescribeFood) setClause.push(`DescribeFood = '${DescribeFood}'`);
-  if (Avatar) setClause.push(`Avatar = '${Avatar.url}'`);
+  if (Avatar) setClause.push(`food_Avatar = '${Avatar.url}'`);
   if (Food_Price) setClause.push(`Food_Price = '${Food_Price}'`);
 
   // Construct the SQL query

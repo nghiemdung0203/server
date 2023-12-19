@@ -9,7 +9,7 @@ module.exports.AddFood = async (req, res) => {
     folder: "Food",
   });
   pool.query(
-    "INSERT INTO food (Name, DescribeFood, Food_Price, Avatar) VALUES (?, ?, ?, ?)",
+    "INSERT INTO food (Name, DescribeFood, Food_Price, food_Avatar) VALUES (?, ?, ?, ?)",
     [Name, DescribeFood, Food_Price, Avatar.secure_url],
     (error, result) => {
       if (error) {
