@@ -37,7 +37,7 @@ router.patch(
   upload.single("AvatarPicture"),
   UpdateRestaurant
 );
-router.put("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
+router.patch("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
 router.get("/GetEmployee", AuthenManager, GetEmployee);
-router.put("/AddEmployee", AddEmployee);
+router.patch("/AddEmployee", AddEmployee);
 module.exports = router;
