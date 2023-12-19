@@ -15,6 +15,9 @@ const {
 const { UpdateProfile } = require("../Controller/UserController/UpdateProfile");
 
 const multer = require("multer");
+const {
+  GetAllRestaurant,
+} = require("../Controller/RestaurantController/GetAllRestaurant");
 const upload = multer({ dest: "uploads/" });
 
 router.post("/register", upload.single("AvatarPicture"), SignUp);
@@ -25,5 +28,6 @@ router.get("/GetProfiles", GetProfiles);
 router.get("/GetSpecificProfile", GetSpecificProfile);
 router.post("/createManager", createManager);
 router.post("/updateProfile", verifyToken, UpdateProfile);
+router.get("/getAllRestaurant", GetAllRestaurant);
 
 module.exports = router;
