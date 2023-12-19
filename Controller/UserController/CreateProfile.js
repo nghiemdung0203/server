@@ -18,7 +18,7 @@ module.exports.CreateProfile = (req, res) => {
   let randomString = generateRandomString();
 
   if (Role === 'Customer') {
-    randomString = null;
+    
     pool.query(
       "INSERT INTO profile (UserID, Role, restaurantID, isWorking, CodeName) VALUES (?, ?, ?, ?, ?)",
       [UserID, Role, null, 0, randomString],
