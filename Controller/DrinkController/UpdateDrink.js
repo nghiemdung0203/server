@@ -2,7 +2,7 @@ const pool = require("../../database");
 const cloudinary = require("../../cloudinary");
 module.exports.UpdateDrink = async (req, res) => {
   const { DrinkID, DrinkName, DrinksPrice, Drink_Description } = req.body;
-
+  console.log(DrinkID)
   let Avatar = null;
   if (req.file) {
     const AvatarPath = req.file.path;
