@@ -1,7 +1,8 @@
 const pool = require("../../database");
 
 module.exports.GetFood = (req, res) => {
-    pool.query('SELECT * FROM food LIMIT 5', (error, result) => {
+    const { FoodID } = req.query.FoodID;
+    pool.query('SELECT * FROM food where Food_id = ?', [FoodID], (error, result) => {
         if (error) {
             return res.status(500).send(error);
         } else {
