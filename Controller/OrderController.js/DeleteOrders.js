@@ -1,7 +1,7 @@
 const pool = require('../../database');
 
 module.exports.DeleteOrders = (req, res) => {
-    const { OrderID } = req.query.OrderID;
+    const  OrderID  = req.query.OrderID;
     pool.query('Delete From orderitems where OrderID = ?', [OrderID], (delError, delResult) => {
         if (delError) {
             return res.status(500).send(delError);
