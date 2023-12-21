@@ -17,6 +17,7 @@ const { GetOrderByRestaurant } = require("../Controller/OrderController.js/GetOr
 const {
   GetSpecificOrder,
 } = require("../Controller/OrderController.js/GetSpecificOrder");
+const { UpdateOrder } = require("../Controller/OrderController.js/UpdateOrder");
 const AuthenForCashier = require("../Middleware/AuthenForCashier");
 const AuthenForChef = require("../Middleware/AuthenForChef");
 const AuthenForCustomer = require("../Middleware/AuthenForCustomer");
@@ -34,6 +35,7 @@ router.delete("/DeleteOrder", DeleteOrders);
 router.get("/GetOrder", GetOrder);
 router.get("/GetSpecificOrder", GetSpecificOrder);
 router.patch("/CompletePayment", AuthenForCashier, CompletePayment);
-router.patch("/CompoleteOrder",AuthenForChef, CompleteOrder)
+router.patch("/CompoleteOrder", AuthenForChef, CompleteOrder)
+router.patch("/UpdateOrder", UpdateOrder)
 router.get('/GetOrderByRestaurant', GetOrderByRestaurant)
 module.exports = router;
