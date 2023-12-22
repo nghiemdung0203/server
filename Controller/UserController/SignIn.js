@@ -21,11 +21,11 @@ module.exports.SignIn = (req, res) => {
 
       const user = results[0]; // Assuming the query returns only one user
 
-      pool.query(`UPDATE users SET token = ${token} WHERE uid = ${user.uid}`, (err, ress) =>{
+      pool.query('UPDATE users SET token = ? WHERE uid = ?', [token, uid], (err, ress) => {
         if (err) {
           return res.status(500).send("Invalid credentials");
         } else {
-          return res.status(200).json("Login successful")
+          return res.status(200).json(user)
         }
       })
     }
