@@ -43,10 +43,10 @@ module.exports.CreateRestaurant = async (req, res) => {
     ]);
 
     // Insert tables into tableforrestaurant
-    for (let i = 0; i < Number_of_table; i++) {
+    for (var i = 1; i <= Number_of_table; i++) {
       await promisePool.query(
-        "INSERT INTO tableforrestaurant (NumberOfcustomer, RestaurantID) VALUES (?, ?)",
-        [0, restaurantRows.insertId]
+        "INSERT INTO tableForRestaurant (NumberOfcustomer, RestaurantID, STT) VALUES (?, ?, ?)",
+        [0, restaurantRows.insertId, i]
       );
     }
 
