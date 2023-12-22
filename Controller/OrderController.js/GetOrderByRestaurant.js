@@ -8,7 +8,7 @@ module.exports.GetOrderByRestaurant = (req, res) => {
             if (error) {
                 return res.status(500).send(error);
             } else {
-                return res.status(200).send(result[0]);
+                return res.status(200).send(result);
             }
         },
     );
