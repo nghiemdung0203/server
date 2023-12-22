@@ -7,7 +7,7 @@ module.exports.SignIn = (req, res) => {
 
   // Query the database to check if the user exists with the provided email
   pool.query(
-    "SELECT * FROM Users WHERE email = ?",
+    "SELECT * FROM users WHERE Email = ?",
     [email],
     (error, results) => {
       if (error) {
