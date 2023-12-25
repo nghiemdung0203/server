@@ -21,6 +21,7 @@ const {
 } = require("../Controller/RestaurantController/GetEmployee");
 const { AddEmployee } = require("../Controller/RestaurantController/AddEmployee");
 const { GetAllRestaurant } = require("../Controller/RestaurantController/GetAllRestaurant");
+const { RevenuInAWeek } = require("../Controller/RestaurantController/RevenuInAWeek.");
 
 const router = require("express").Router();
 
@@ -42,4 +43,5 @@ router.patch("/DeleteEmeployeeToRestaurant", DeleteEmeployeeToRestaurant);
 router.get("/GetEmployee", AuthenManager, GetEmployee);
 router.patch("/AddEmployee", AddEmployee);
 router.get("/GetAllRestaurant", GetAllRestaurant);
+router.get("/RevenuInAWeek", RevenuInAWeek);
 module.exports = router;
