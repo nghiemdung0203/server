@@ -4,7 +4,7 @@ module.exports.GetUserByProfileID = (req, res) => {
     const profileID = req.query.profileID;
 
     pool.query(
-        'SELECT users.Name, users.Avatar FROM users ' +
+        'SELECT users.Name, users.Avatar, profile.CodeName FROM users ' +
         'INNER JOIN profile ON users.uid = profile.UserID ' +
         'WHERE profile.ID = ?',
         [profileID],
