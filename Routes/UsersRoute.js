@@ -27,7 +27,7 @@ router.delete("/deleteProfile", verifyToken, DeleteProfile);
 router.get("/GetProfiles", GetProfiles);
 router.get("/GetSpecificProfile", GetSpecificProfile);
 router.post("/createManager", createManager);
-router.post("/updateProfile", verifyToken, UpdateProfile);
+router.patch("/updateProfile", verifyToken, UpdateProfile);
 router.get("/getAllRestaurant", GetAllRestaurant);
 
 module.exports = router;
