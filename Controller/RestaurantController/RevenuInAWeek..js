@@ -45,7 +45,7 @@ module.exports.RevenuInAWeek = (req, res) => {
             )
                 .then((responses) => {
                     // After all inner queries are executed, send the final response
-                    return res.status(200).send({ revenu });
+                    return res.status(200).send(responses);
                 })
                 .catch((err) => {
                     return res.status(500).send(err);
