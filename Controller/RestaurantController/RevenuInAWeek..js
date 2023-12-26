@@ -24,12 +24,16 @@ module.exports.RevenuInAWeek = (req, res) => {
                                 if (err) {
                                     resolve({ error: err.message });
                                 } else {
-                                     // Calculate revenue for each row and accumulate the total revenue
-                                     const rowRevenue = ress.reduce(
-                                        (acc, item) => weekrev = acc + item.Food_Price * item.Quantity,
-                                        0
+                                    // Calculate revenue for each row and accumulate the total revenue
+                                    
+                                    const rowRevenue = ress.reduce(
+                                        (acc, item) => {
+                                            const weekrev = 0
+                                            weekrev += acc + item.Food_Price * item.Quantity;
+                                            revenue.push({ row, weekrev })
+                                        }
                                     );
-                                    revenue.push({ row, weekrev })
+
 
                                     // Attach revenue to each row and resolve the promise
                                     resolve(revenue);
