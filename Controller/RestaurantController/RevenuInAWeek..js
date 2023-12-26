@@ -3,38 +3,41 @@ const pool = require("../../database");
 module.exports.RevenuInAWeek = async (req, res) => {
     const date = req.query.date;
     console.log(date);
-    const revenue = [];
+    const promisePool = pool.promise();
 
     try {
-        const promisePool = pool.promise();
-
         const [result] = await promisePool.query(
-            'SELECT DISTINCT DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) AS orderDay FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p")',
+            'SELECT DISTINCT DATE_FORMAT(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p"), "%m/%d/%Y") AS orderDay FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p")',
             [date, date]
         );
 
-        await Promise.all(
+        const revenue = await Promise.all(
             result.map(async (dayRow) => {
                 const day = dayRow.orderDay;
 
                 const [dayOrders] = await promisePool.query(
-                    'SELECT * FROM orders WHERE DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) = ?',
+                    'SELECT * FROM orders WHERE DATE_FORMAT(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p"), "%m/%d/%Y") = ?',
                     [day]
                 );
 
                 const dayRevenue = dayOrders.reduce(
-                    (acc, order) => {
-                        const orderItems = order.OrderItems || [];
-                        const orderRevenue = orderItems.reduce(
+                    async (acc, order) => {
+                        const orderItems = await promisePool.query(
+                            'SELECT * FROM orderitems LEFT JOIN food ON orderitems.FoodID = food.Food_id LEFT JOIN drinks ON orderitems.DrinkID = drinks.Drink_id WHERE orderitems.OrderID = ?',
+                            [order.Order_id]
+                        );
+
+                        const orderTotal = orderItems[0].reduce(
                             (itemAcc, item) => itemAcc + item.Food_Price * item.Quantity,
                             0
                         );
-                        return acc + orderRevenue;
+
+                        return acc + orderTotal;
                     },
                     0
                 );
 
-                revenue.push({ day, dayRevenue });
+                return { date: day, total: dayRevenue };
             })
         );
 
