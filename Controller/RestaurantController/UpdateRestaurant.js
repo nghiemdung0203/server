@@ -1,7 +1,7 @@
 const pool = require("../../database");
 
 module.exports.UpdateRestaurant = async (req, res) => {
-  const { RestaurantID, Name, Address, PhoneNumber } = req.body;
+  const { RestaurantID, Name, Address, PhoneNumber, Time, Description } = req.body;
 
   const AvatarPath = req.file.path;
   const Avatar = await cloudinary.uploader.upload(AvatarPath, {
@@ -10,7 +10,7 @@ module.exports.UpdateRestaurant = async (req, res) => {
   });
 
   // Check if at least one property is provided for update
-  if (!Name && !Address && !PhoneNumber && !Avatar) {
+  if (!Name && !Address && !PhoneNumber && !Avatar && !Time && !Description) {
     return res
       .status(400)
       .json({ error: "At least one property is required for update." });
@@ -21,6 +21,8 @@ module.exports.UpdateRestaurant = async (req, res) => {
   if (Name) setClause.push(`Name = '${Name}'`);
   if (Address) setClause.push(`Address = '${Address}'`);
   if (PhoneNumber) setClause.push(`PhoneNumber = '${PhoneNumber}'`);
+  if (Time) setClause.push(`Time = '${Time}'`);
+  if (Description) setClause.push(`Description = '${Description}'`);
   if (Avatar) setClause.push(`Avatar = '${Avatar}'`);
 
   // Construct the SQL query
