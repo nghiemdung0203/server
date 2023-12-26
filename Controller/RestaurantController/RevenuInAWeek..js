@@ -6,7 +6,9 @@ module.exports.RevenuInAWeek = async (req, res) => {
     const revenue = [];
 
     try {
-        const result = await pool.query(
+        const promisePool = pool.promise();
+
+        const [result] = await promisePool.query(
             'SELECT DISTINCT DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) AS orderDay FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p")',
             [date, date]
         );
@@ -15,7 +17,7 @@ module.exports.RevenuInAWeek = async (req, res) => {
             result.map(async (dayRow) => {
                 const day = dayRow.orderDay;
 
-                const dayOrders = await pool.query(
+                const [dayOrders] = await promisePool.query(
                     'SELECT * FROM orders WHERE DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) = ?',
                     [day]
                 );
