@@ -1,12 +1,12 @@
 const pool = require("../../database");
 
 module.exports.RevenuInAWeek = (req, res) => {
-    let revenu = 0;
     const date = req.query.date;
     console.log(date);
-    var revenue = [];
+    const revenue = [];
+
     pool.query(
-        'SELECT * FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") IN (SELECT DISTINCT STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"))',
+        'SELECT DISTINCT DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) AS orderDay FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p")',
         [date, date],
         (error, result) => {
             if (error) {
@@ -15,27 +15,29 @@ module.exports.RevenuInAWeek = (req, res) => {
 
             // Use a Promise to ensure all inner queries are executed before sending the response
             Promise.all(
-                result.map((row) => {
+                result.map((dayRow) => {
                     return new Promise((resolve) => {
+                        const day = dayRow.orderDay;
+
                         pool.query(
-                            "SELECT * FROM orderitems LEFT JOIN food ON orderitems.FoodID = food.Food_id LEFT JOIN drinks ON orderitems.DrinkID = drinks.Drink_id WHERE orderitems.OrderID = ?",
-                            [row.Order_id],
-                            (err, ress) => {
+                            'SELECT * FROM orders WHERE DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) = ?',
+                            [day],
+                            (err, dayOrders) => {
                                 if (err) {
                                     resolve({ error: err.message });
                                 } else {
-                                    // Calculate revenue for each row and accumulate the total revenue
-                                    
-                                    const rowRevenue = ress.reduce(
-                                        (acc, item) => {
-                                            const weekrev = 0
-                                            weekrev += acc + item.Food_Price * item.Quantity;
-                                            revenue.push({ row, weekrev })
-                                        }
+                                    const dayRevenue = dayOrders.reduce(
+                                        (acc, order) => {
+                                            const orderRevenue = order.OrderItems.reduce(
+                                                (itemAcc, item) => itemAcc + item.Food_Price * item.Quantity,
+                                                0
+                                            );
+                                            return acc + orderRevenue;
+                                        },
+                                        0
                                     );
 
-
-                                    // Attach revenue to each row and resolve the promise
+                                    revenue.push({ day, dayRevenue });
                                     resolve(revenue);
                                 }
                             }
