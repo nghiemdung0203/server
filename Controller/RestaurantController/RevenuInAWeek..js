@@ -4,7 +4,7 @@ module.exports.RevenuInAWeek = (req, res) => {
     let revenu = 0;
     const date = req.query.date;
     console.log(date);
-
+    var revenue = [];
     pool.query(
         'SELECT * FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") IN (SELECT DISTINCT STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") FROM orders WHERE STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p") BETWEEN DATE_SUB(STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"), INTERVAL 7 DAY) AND STR_TO_DATE(?, "%m/%d/%Y, %h:%i:%s %p"))',
         [date, date],
@@ -24,15 +24,15 @@ module.exports.RevenuInAWeek = (req, res) => {
                                 if (err) {
                                     resolve({ error: err.message });
                                 } else {
-                                    // Calculate revenue for each row and accumulate the total revenue
-                                    const rowRevenue = ress.reduce(
-                                        (acc, item) => acc + item.Food_Price * item.Quantity,
+                                     // Calculate revenue for each row and accumulate the total revenue
+                                     const rowRevenue = ress.reduce(
+                                        (acc, item) => weekrev = acc + item.Food_Price * item.Quantity,
                                         0
                                     );
-                                    revenu += rowRevenue;
+                                    revenue.push({ row, weekrev })
 
                                     // Attach revenue to each row and resolve the promise
-                                    resolve({ row, rowRevenue });
+                                    resolve(revenue);
                                 }
                             }
                         );
