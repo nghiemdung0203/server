@@ -32,7 +32,7 @@ router.post("/createManager", createManager);
 router.patch("/updateProfile", verifyToken, UpdateProfile);
 router.get("/getAllRestaurant", GetAllRestaurant);
 router.get("/getUserByProfileID", GetUserByProfileID);
-router.patch("/UpdateUser", UpdateUser);
+router.patch("/UpdateUser", upload.single("AvatarPicture"), UpdateUser);
 
 
 module.exports = router;
