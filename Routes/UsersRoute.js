@@ -19,6 +19,7 @@ const {
   GetAllRestaurant,
 } = require("../Controller/RestaurantController/GetAllRestaurant");
 const { GetUserByProfileID } = require("../Controller/UserController/GetUserByProfileID");
+const { UpdateUser } = require("../Controller/UserController/UpdateUser");
 const upload = multer({ dest: "uploads/" });
 
 router.post("/register", upload.single("AvatarPicture"), SignUp);
@@ -31,6 +32,7 @@ router.post("/createManager", createManager);
 router.patch("/updateProfile", verifyToken, UpdateProfile);
 router.get("/getAllRestaurant", GetAllRestaurant);
 router.get("/getUserByProfileID", GetUserByProfileID);
+router.patch("/UpdateUser", UpdateUser);
 
 
 module.exports = router;
