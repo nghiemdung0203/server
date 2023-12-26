@@ -24,7 +24,7 @@ module.exports.UpdateRestaurant = async (req, res) => {
   if (PhoneNumber) setClause.push(`PhoneNumber = '${PhoneNumber}'`);
   if (Time) setClause.push(`Time = '${Time}'`);
   if (Description) setClause.push(`Description = '${Description}'`);
-  if (Avatar) setClause.push(`Avatar = '${Avatar}'`);
+  if (Avatar) setClause.push(`Avatar = '${Avatar.url}'`);
 
   // Construct the SQL query
   const updateQuery = `UPDATE restaurant SET ${setClause.join(
