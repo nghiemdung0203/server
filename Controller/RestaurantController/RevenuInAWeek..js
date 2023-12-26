@@ -28,7 +28,8 @@ module.exports.RevenuInAWeek = (req, res) => {
                                 } else {
                                     const dayRevenue = dayOrders.reduce(
                                         (acc, order) => {
-                                            const orderRevenue = order.OrderItems.reduce(
+                                            const orderItems = order.OrderItems || [];
+                                            const orderRevenue = orderItems.reduce(
                                                 (itemAcc, item) => itemAcc + item.Food_Price * item.Quantity,
                                                 0
                                             );
