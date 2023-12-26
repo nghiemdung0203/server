@@ -7,9 +7,9 @@ const upload = multer({ dest: 'uploads/' });
 
 const router = require('express').Router();
 
-router.post('/AddDrink',upload.single('AvatarPicture') ,AddDrink);
+router.post('/AddDrink', upload.single('AvatarPicture'), AddDrink);
 router.get('/GetDrink', GetDrinks);
 router.delete('/DeleteDrink', DeleteDrink);
-router.patch('/UpdateDrink', UpdateDrink)
+router.patch('/UpdateDrink', upload.single("AvatarPicture"), UpdateDrink)
 
 module.exports = router
