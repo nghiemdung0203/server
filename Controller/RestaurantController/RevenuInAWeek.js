@@ -18,9 +18,17 @@ module.exports.RevenuInAWeek = async (req, res) => {
             result.map(async (row) => {
                 const day = row.orderDay;
 
+                var parts = day.split("/");
+                var formattedDate =
+                    parts[2] +
+                    "-" +
+                    ("0" + parts[0]).slice(-2) +
+                    "-" +
+                    ("0" + parts[1]).slice(-2);
+
                 const [dayOrders] = await promisePool.query(
-                    'SELECT * FROM orders WHERE DATE_FORMAT(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p"), "%m/%d/%Y") = ?',
-                    [day]
+                    'SELECT * FROM orders WHERE DATE(STR_TO_DATE(orderDate, "%m/%d/%Y, %h:%i:%s %p")) = ?',
+                    [formattedDate]
                 );
 
                 const dayRevenue = dayOrders.reduce(async (acc, order) => {
