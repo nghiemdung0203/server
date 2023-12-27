@@ -21,7 +21,7 @@ const {
 } = require("../Controller/RestaurantController/GetEmployee");
 const { AddEmployee } = require("../Controller/RestaurantController/AddEmployee");
 const { GetAllRestaurant } = require("../Controller/RestaurantController/GetAllRestaurant");
-const { RevenuInAWeek } = require("../Controller/RestaurantController/RevenuInAWeek.");
+const { RevenuInAWeek } = require("../Controller/RestaurantController/RevenuInAWeek");
 
 const router = require("express").Router();
 
