@@ -25,7 +25,7 @@ module.exports.UpdateUser = async (req, res) => {
     // Construct the SQL query
     const updateQuery = `UPDATE users SET ${setClause.join(
         ", "
-    )} WHERE uid = ${uid}`;
+    )} WHERE uid = '${uid}'`;
 
     // Execute the update query
     pool.query(updateQuery, (error, result) => {
