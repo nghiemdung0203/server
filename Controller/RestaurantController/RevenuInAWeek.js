@@ -37,7 +37,7 @@ module.exports.RevenuInAWeek = async (req, res) => {
                         [order.Order_id]
                     );
 
-                    const orderTotal = orderItems[0].reduce(
+                    const orderTotal = orderItems.reduce(
                         (itemAcc, item) =>
                             itemAcc +
                             (item.Food_Price || 0) * item.Quantity +
