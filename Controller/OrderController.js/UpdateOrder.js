@@ -29,7 +29,7 @@ module.exports.UpdateOrder = async (req, res) => {
     // Construct the SQL query
     const updateQuery = `UPDATE orders SET ${setClause.join(
         ", "
-    )} WHERE ID = ${Order_id}`;
+    )} WHERE Order_id = ${Order_id}`;
 
     // Execute the update query
     pool.query(updateQuery, (error, result) => {

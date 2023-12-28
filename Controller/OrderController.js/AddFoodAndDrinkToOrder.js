@@ -1,42 +1,40 @@
-const pool = require('../../database');
+const pool = require("../../database");
 
 module.exports.AddFoodAndDrinkToOrder = (req, res) => {
     const { OrderID, FoodItems, DrinkItems } = req.body;
 
     if (!OrderID) {
-        return res.status(400).send('Invalid Order ID');
+        return res.status(400).send("Invalid Order ID");
     } else if (!FoodItems && !DrinkItems) {
-        return res.status(400).send('Something is wrong with the order');
+        return res.status(400).send("Something is wrong with the order");
     }
 
     const foodPromises = FoodItems
-        ? FoodItems.map(item => {
+        ? FoodItems.map((item) => {
               const { food_id, quantity } = item;
-              return executeQuery('INSERT INTO orderitems (OrderID, FoodID, Quantity) VALUES (?, ?, ?)', [
-                  OrderID,
-                  food_id,
-                  quantity,
-              ]);
+              return executeQuery(
+                  "INSERT INTO orderitems (OrderID, FoodID, Quantity) VALUES (?, ?, ?)",
+                  [OrderID, food_id, quantity]
+              );
           })
         : [];
 
     const drinkPromises = DrinkItems
-        ? DrinkItems.map(item => {
+        ? DrinkItems.map((item) => {
               const { drink_id, quantity } = item;
-              return executeQuery('INSERT INTO orderitems (OrderID, DrinkID, Quantity) VALUES (?, ?, ?)', [
-                  OrderID,
-                  drink_id,
-                  quantity,
-              ]);
+              return executeQuery(
+                  "INSERT INTO orderitems (OrderID, DrinkID, Quantity) VALUES (?, ?, ?)",
+                  [OrderID, drink_id, quantity]
+              );
           })
         : [];
 
     // Combine all promises and wait for them to complete
     Promise.all([...foodPromises, ...drinkPromises])
-        .then(results => {
+        .then((results) => {
             res.status(200).send(results);
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(400).send(error);
         });
 };
